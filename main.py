@@ -8,6 +8,7 @@ from gi.repository import Gtk, Gio
 class Calculator(Gtk.Application):
     def __init__(self) -> None:
         super().__init__(application_id='com.calculator.gminos', flags=Gio.ApplicationFlags.FLAGS_NONE)
+        self.window: Gtk.Window | None = None
 
     def do_activate(self):
         builder = Gtk.Builder()
@@ -17,9 +18,15 @@ class Calculator(Gtk.Application):
             print(f"Error cargando la interfaz: {e}")
             sys.exit(1)
 
-        self.window = builder.get_object('main_window')
-        self.window.set_application(self)
-        self.window.present()
+        window = builder.get_object('main_window')
+
+        if isinstance(window, Gtk.Window):
+            self.window = window
+            self.window.set_application(self)
+            self.window.present()
+        else:
+            print("Error: 'main_window' no es un Gtk.Window o no se encontró.")
+            sys.exit(1)
 
 
 if __name__ == '__main__':
