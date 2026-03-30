@@ -10,7 +10,7 @@ class Calculator(Gtk.Application):
         super().__init__(application_id='com.calculator.gminos', flags=Gio.ApplicationFlags.FLAGS_NONE)
         self.window: Gtk.Window | None = None
         self.entry: Gtk.Entry | None = None
-        self.btns_ids = (
+        self.btn_num_ids = (
             "btn_1", 
             "btn_2", 
             "btn_3",
@@ -46,7 +46,7 @@ class Calculator(Gtk.Application):
 
         self.entry = entry_obj
 
-        for btn_id in self.btns_ids:
+        for btn_id in self.btn_num_ids:
             btn_id_obj = builder.get_object(btn_id)
             if isinstance(btn_id_obj, Gtk.Button):
                 btn_id_obj.connect('clicked', self.on_digit_pressed)
