@@ -54,9 +54,16 @@ class Calculator(Gtk.Application):
         self.window.present()
 
     def on_digit_pressed(self, button: Gtk.Button) -> None:
-        number = button.get_label()
-        if self.entry is not None and number is not None:
-            self.entry.set_text(number)
+        label = button.get_label()
+
+        if self.entry is not None and label is not None:
+            current_text = self.entry.get_text()
+            end_pos = self.entry.get_text_length()
+
+            if current_text == "0":
+                self.entry.delete_text(0, end_pos)
+
+            self.entry.insert_text(label, self.entry.get_text_length())
 
 
 if __name__ == '__main__':
