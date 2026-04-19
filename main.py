@@ -10,18 +10,7 @@ class Calculator(Gtk.Application):
         super().__init__(application_id='com.calculator.gminos', flags=Gio.ApplicationFlags.FLAGS_NONE)
         self.window: Gtk.Window | None = None
         self.entry: Gtk.Entry | None = None
-        self.btn_num_ids = (
-            "btn_1", 
-            "btn_2", 
-            "btn_3",
-            "btn_4", 
-            "btn_5", 
-            "btn_6", 
-            "btn_7", 
-            "btn_8", 
-            "btn_9", 
-            "btn_0"
-        )
+        self.buttons_grid: Gtk.Widget | None = None
 
     def do_activate(self) -> None:
         builder = Gtk.Builder()
@@ -40,16 +29,28 @@ class Calculator(Gtk.Application):
         self.window.set_application(self)
 
         entry_obj = builder.get_object('display')
+
         if not isinstance(entry_obj, Gtk.Entry):
             print("Error: Not found display")
             return
 
         self.entry = entry_obj
 
-        for btn_id in self.btn_num_ids:
-            btn_id_obj = builder.get_object(btn_id)
-            if isinstance(btn_id_obj, Gtk.Button):
-                btn_id_obj.connect('clicked', self.on_digit_pressed)
+        grid_container = builder.get_object('gtk_grid')
+
+        if not isinstance(grid_container, Gtk.Widget):
+            print("Error")
+            return
+
+        self.buttons_grid = grid_container
+
+        current_button = self.buttons_grid.get_first_child()
+
+        while current_button is not None:
+            if current_button.has_css_class("number-button"):
+                current_button.connect('clicked', self.on_digit_pressed)
+
+            current_button = current_button.get_next_sibling()
 
         self.window.present()
 

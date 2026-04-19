@@ -21,18 +21,18 @@
             <property name="editable">false</property>
             <property name="halign">fill</property>
             <property name="margin-bottom">5</property>
-            <property name="placeholder-text">0</property>
             <property name="xalign">1</property>
           </object>
         </child>
         <child>
-          <object class="GtkGrid">
+          <object class="GtkGrid" id="gtk_grid">
             <property name="column-homogeneous">true</property>
             <property name="column-spacing">5</property>
             <property name="row-homogeneous">true</property>
             <property name="row-spacing">5</property>
             <child>
               <object class="GtkButton" id="btn_7">
+                <property name="css-classes">number-button</property>
                 <property name="label">7</property>
                 <layout>
                   <property name="column">0</property>
@@ -42,6 +42,7 @@
             </child>
             <child>
               <object class="GtkButton" id="btn_8">
+                <property name="css-classes">number-button</property>
                 <property name="label">8</property>
                 <layout>
                   <property name="column">1</property>
@@ -51,6 +52,7 @@
             </child>
             <child>
               <object class="GtkButton" id="btn_9">
+                <property name="css-classes">number-button</property>
                 <property name="label">9</property>
                 <layout>
                   <property name="column">2</property>
@@ -69,6 +71,7 @@
             </child>
             <child>
               <object class="GtkButton" id="btn_4">
+                <property name="css-classes">number-button</property>
                 <property name="label">4</property>
                 <layout>
                   <property name="column">0</property>
@@ -78,6 +81,7 @@
             </child>
             <child>
               <object class="GtkButton" id="btn_5">
+                <property name="css-classes">number-button</property>
                 <property name="label">5</property>
                 <layout>
                   <property name="column">1</property>
@@ -87,6 +91,7 @@
             </child>
             <child>
               <object class="GtkButton" id="btn_6">
+                <property name="css-classes">number-button</property>
                 <property name="label">6</property>
                 <layout>
                   <property name="column">2</property>
@@ -105,6 +110,7 @@
             </child>
             <child>
               <object class="GtkButton" id="btn_1">
+                <property name="css-classes">number-button</property>
                 <property name="label">1</property>
                 <layout>
                   <property name="column">0</property>
@@ -114,6 +120,7 @@
             </child>
             <child>
               <object class="GtkButton" id="btn_2">
+                <property name="css-classes">number-button</property>
                 <property name="label">2</property>
                 <layout>
                   <property name="column">1</property>
@@ -123,6 +130,7 @@
             </child>
             <child>
               <object class="GtkButton" id="btn_3">
+                <property name="css-classes">number-button</property>
                 <property name="label">3</property>
                 <layout>
                   <property name="column">2</property>
@@ -150,6 +158,7 @@
             </child>
             <child>
               <object class="GtkButton" id="btn_0">
+                <property name="css-classes">number-button</property>
                 <property name="label">0</property>
                 <layout>
                   <property name="column">1</property>
