@@ -2,5 +2,5 @@
 <!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
 <!-- Created with Cambalache 1.0 -->
 <cambalache-project version="1.0.0" target_tk="gtk-4.0">
-  <ui template-class="CalculatorWindow" filename="calculator.ui" sha256="ad35ac5c0d4986a097c2db5d6cc62fe4df4a9ce87554b9ade445a0566bf006eb"/>
+  <ui template-class="CalculatorWindow" filename="calculator.ui" sha256="7f21558bc2c6753b511b319c85415c98e77e8e75d61ea883caa2f6a14821cf20"/>
 </cambalache-project>
