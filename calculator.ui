@@ -159,6 +159,7 @@
             <child>
               <object class="GtkButton" id="btn_clear">
                 <property name="label">C</property>
+                <signal name="clicked" handler="on_clear_pressed"/>
                 <layout>
                   <property name="column">0</property>
                   <property name="row">3</property>

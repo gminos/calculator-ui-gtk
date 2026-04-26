@@ -23,6 +23,10 @@ class CalculatorWindow(Gtk.Window):
 
         self.display.insert_text(label, self.display.get_text_length())
 
+    @Gtk.Template.Callback()
+    def on_clear_pressed(self, _) -> None:
+        self.display.set_text("")
+
 
 class Calculator(Gtk.Application):
     def __init__(self) -> None:
@@ -32,7 +36,6 @@ class Calculator(Gtk.Application):
         self.window = CalculatorWindow()
         self.window.set_application(self)
         self.window.present()
-
 
 
 if __name__ == '__main__':
