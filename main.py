@@ -3,6 +3,7 @@ import sys
 
 gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk, Gio
+from decimal import Decimal, getcontext
 
 
 @Gtk.Template(filename='calculator.ui')
@@ -11,9 +12,10 @@ class CalculatorWindow(Gtk.Window):
 
     def __init__(self) -> None:
         super().__init__()
-        self.operand_a: float = 0.0
+        self.operand_a: Decimal = Decimal("0")
         self.operator: str = ""
         self.is_new_input: bool = False
+        getcontext().prec = 10
 
     display: Gtk.Entry = Gtk.Template.Child()
 
@@ -35,7 +37,7 @@ class CalculatorWindow(Gtk.Window):
 
     @Gtk.Template.Callback()
     def on_operator_pressed(self, operator: Gtk.Button) -> None:
-        self.operand_a = float(self.display.get_text() or "0")
+        self.operand_a = Decimal(self.display.get_text() or "0")
         self.operator = operator.get_label() or ""
         self.is_new_input = True
 
@@ -45,8 +47,8 @@ class CalculatorWindow(Gtk.Window):
 
     @Gtk.Template.Callback()
     def on_equal_pressed(self, _) -> None:
-        operand_b = float(self.display.get_text() or "0")
-        result = 0.0
+        operand_b = Decimal(self.display.get_text() or "0")
+        result = Decimal("0")
 
         match self.operator:
             case "+":
@@ -65,7 +67,7 @@ class CalculatorWindow(Gtk.Window):
             case _:
                 return
 
-        self.display.set_text(f'{result:g}')
+        self.display.set_text(f"{result.normalize()}")
         self.is_new_input = True
 
 
