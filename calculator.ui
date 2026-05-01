@@ -202,6 +202,7 @@
             <child>
               <object class="GtkButton" id="btn_equal">
                 <property name="label">=</property>
+                <signal name="clicked" handler="on_equal_pressed"/>
                 <style>
                   <class name="suggested-action"/>
                 </style>

@@ -11,9 +11,9 @@ class CalculatorWindow(Gtk.Window):
 
     def __init__(self) -> None:
         super().__init__()
-        self.first_number: float
-        self.operator: str
-        self.waiting_for_second_number: bool = False
+        self.operand_a: float = 0.0
+        self.operator: str = ""
+        self.is_new_input: bool = False
 
     display: Gtk.Entry = Gtk.Template.Child()
 
@@ -21,9 +21,9 @@ class CalculatorWindow(Gtk.Window):
     def on_digit_pressed(self, button: Gtk.Button) -> None:
         label = button.get_label()
 
-        if self.waiting_for_second_number:
+        if self.is_new_input:
             self.display.set_text("")
-            self.waiting_for_second_number = False
+            self.is_new_input = False
 
         current_text = self.display.get_text()
         end_pos = self.display.get_text_length()
@@ -35,13 +35,38 @@ class CalculatorWindow(Gtk.Window):
 
     @Gtk.Template.Callback()
     def on_operator_pressed(self, operator: Gtk.Button) -> None:
-        self.first_number = float(self.display.get_text() or "0")
+        self.operand_a = float(self.display.get_text() or "0")
         self.operator = operator.get_label() or ""
-        self.waiting_for_second_number = True
+        self.is_new_input = True
 
     @Gtk.Template.Callback()
     def on_clear_pressed(self, _) -> None:
         self.display.set_text("")
+
+    @Gtk.Template.Callback()
+    def on_equal_pressed(self, _) -> None:
+        operand_b = float(self.display.get_text() or "0")
+        result = 0.0
+
+        match self.operator:
+            case "+":
+                result = self.operand_a + operand_b
+            case "-":
+                result = self.operand_a - operand_b
+            case "*":
+                result = self.operand_a * operand_b
+            case "/":
+                try:
+                    result = self.operand_a / operand_b
+                except ZeroDivisionError:
+                    self.display.set_text("division by zero")
+                    self.is_new_input = True
+                    return
+            case _:
+                return
+
+        self.display.set_text(f'{result:g}')
+        self.is_new_input = True
 
 
 class Calculator(Gtk.Application):
